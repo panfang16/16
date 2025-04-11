@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>MBTI 小測驗</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+    }
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+    #result {
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>MBTI 小測驗</h1>
+
+  <div class="question" id="q1">
+    <p>1. 你更喜歡：</p>
+    <button onclick="answer('E')">和人一起活動</button>
+    <button onclick="answer('I')">獨處</button>
+  </div>
+
+  <div class="question" id="q2">
+    <p>2. 你更重視：</p>
+    <button onclick="answer('S')">實際的事實</button>
+    <button onclick="answer('N')">直覺與靈感</button>
+  </div>
+
+  <div class="question" id="q3">
+    <p>3. 你做決定時偏向：</p>
+    <button onclick="answer('T')">理性分析</button>
+    <button onclick="answer('F')">感受與價值觀</button>
+  </div>
+
+  <div class="question" id="q4">
+    <p>4. 你偏好：</p>
+    <button onclick="answer('J')">有計畫的生活</button>
+    <button onclick="answer('P')">靈活應變的生活</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    const answers = [];
+
+    function answer(letter) {
+      answers.push(letter);
+      const current = answers.length;
+      if (current < 5) {
+        document.getElementById("q" + current).style.display = "none";
+        if (document.getElementById("q" + (current + 1))) {
+          document.getElementById("q" + (current + 1)).style.display = "block";
+        }
+      }
+
+      if (answers.length === 4) {
+        document.getElementById("q4").style.display = "none";
+        const result = answers.join("");
+        document.getElementById("result").innerHTML = `你的 MBTI 類型是：<strong>${result}</strong>`;
+      }
+    }
+
+    // 初始只顯示第一題
+    for (let i = 2; i <= 4; i++) {
+      document.getElementById("q" + i).style.display = "none";
+    }
+  </script>
+</body>
+</html>
